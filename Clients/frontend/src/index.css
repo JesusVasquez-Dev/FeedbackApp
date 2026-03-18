@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+.container-app {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-card border border-gray-100;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-colors;
+}
+.btn-primary {
+  @apply bg-primary-600 text-white hover:bg-primary-700;
+}
+.btn-cta {
+  @apply bg-gradient-to-r from-primary-500 to-indigo-500 text-white shadow-lg shadow-primary-200/40 hover:from-primary-600 hover:to-indigo-600;
+}
+.btn-success {
+  @apply bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg shadow-emerald-200/40 hover:from-green-600 hover:to-emerald-700;
+}
+.btn-outline {
+  @apply border border-gray-300 text-gray-800 hover:bg-gray-50;
+}
+.input {
+  @apply block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-600 focus:ring-primary-600;
+}
+.label {
+  @apply block text-sm font-medium text-gray-700 mb-1;
+}
+
+/* Figma-inspired helpers */
+.card-soft {
+  @apply bg-white rounded-2xl border border-gray-200 shadow-sm;
+}
+.panel-gradient {
+  @apply rounded-2xl p-6 text-white bg-gradient-to-br from-primary-600 via-primary-600 to-indigo-600;
+}
+.badge {
+  @apply inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-2 py-0.5 text-xs text-gray-600;
+}

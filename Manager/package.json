@@ -1,0 +1,22 @@
+{
+  "name": "onboarding-checkup-system",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm:dev-*\"",
+    "dev-frontend": "npm --workspace frontend run dev",
+    "dev-backend": "npm --workspace backend run dev",
+    "typecheck": "npm -w frontend run typecheck && npm -w backend run typecheck",
+    "build": "npm -w frontend run build && npm -w backend run build",
+    "format": "prettier -w ."
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "prettier": "^3.3.3"
+  }
+}

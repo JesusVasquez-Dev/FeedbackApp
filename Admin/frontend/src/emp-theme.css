@@ -1,0 +1,24 @@
+:root{
+  --emp-active:#011a24;
+  --emp-sidemenu-bg:#022F40;
+  --emp-sidemenu-shadow:#022F36;
+  --emp-hover-name:#fad958;
+  --emp-font:#ffffff;
+  --emp-font-hover:#000000;
+  --emp-card-font:#505354;
+  --emp-card-border:#0090c18f;
+  --emp-button-bg:#0090c1;
+  --emp-button-hover-bg:#fad958;
+}
+.emp-sidemenu{background-color:var(--emp-sidemenu-bg);color:var(--emp-font);box-shadow:1px 0px 30px var(--emp-sidemenu-shadow);} 
+.emp-sidemenu .emp-item{color:var(--emp-font);} 
+.emp-sidemenu .emp-item:hover{background-color:var(--emp-hover-name);color:var(--emp-font-hover);} 
+.emp-active{background-color:var(--emp-active);color:var(--emp-font);} 
+.emp-btn{width:100%;background-color:var(--emp-button-bg);color:var(--emp-font);border-radius:0;padding:0.625rem 1rem;} 
+.emp-btn:hover{background-color:var(--emp-button-hover-bg);color:var(--emp-font-hover);} 
+.emp-btn-inline{background-color:var(--emp-button-bg);color:var(--emp-font);border-radius:0.5rem;padding:0.5rem 0.875rem;}
+.emp-btn-inline:hover{background-color:var(--emp-button-hover-bg);color:var(--emp-font-hover);} 
+.emp-card{background-color:#ffffff;color:var(--emp-card-font);border:1.5px solid var(--emp-card-border);border-radius:0.5rem;}
+
+/* Ensure sidebar rows fill width regardless of global utility overrides */
+.emp-nav-row{width:100%!important;display:flex;}
