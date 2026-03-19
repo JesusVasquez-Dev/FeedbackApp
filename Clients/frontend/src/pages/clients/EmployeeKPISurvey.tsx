@@ -421,7 +421,7 @@ export default function EmployeeKPISurvey({ onBack }: EmployeeKPISurveyProps) {
                   <span className="text-muted-foreground text-lg">/5</span>
                 </div>
                 <Slider
-                  value={[currentResponse.kpi]}
+                  value={currentResponse.kpi}
                   onValueChange={handleKPIChange}
                   max={5}
                   min={0}
