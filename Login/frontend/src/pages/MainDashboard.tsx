@@ -107,10 +107,12 @@ export default function MainDashboard() {
       const { data } = await supabase.auth.getSession();
       const access_token = data.session?.access_token || session?.access_token;
       const refresh_token = data.session?.refresh_token || session?.refresh_token;
-      if (access_token && refresh_token) {
-        target.searchParams.set('access_token', access_token);
-        target.searchParams.set('refresh_token', refresh_token);
+      if (!access_token || !refresh_token) {
+        window.location.href = `/login?redirect_to=${encodeURIComponent(target.toString())}`;
+        return;
       }
+      target.searchParams.set('access_token', access_token);
+      target.searchParams.set('refresh_token', refresh_token);
       // Navigate in the same tab
       window.location.href = target.toString();
     } catch {
@@ -131,10 +133,12 @@ export default function MainDashboard() {
       const { data } = await supabase.auth.getSession();
       const access_token = data.session?.access_token || session?.access_token;
       const refresh_token = data.session?.refresh_token || session?.refresh_token;
-      if (access_token && refresh_token) {
-        target.searchParams.set('access_token', access_token);
-        target.searchParams.set('refresh_token', refresh_token);
+      if (!access_token || !refresh_token) {
+        window.location.href = `/login?redirect_to=${encodeURIComponent(target.toString())}`;
+        return;
       }
+      target.searchParams.set('access_token', access_token);
+      target.searchParams.set('refresh_token', refresh_token);
       window.location.href = target.toString();
     } catch {
       window.location.href = url; // fallback
@@ -152,10 +156,12 @@ export default function MainDashboard() {
       const { data } = await supabase.auth.getSession();
       const access_token = data.session?.access_token || session?.access_token;
       const refresh_token = data.session?.refresh_token || session?.refresh_token;
-      if (access_token && refresh_token) {
-        target.searchParams.set('access_token', access_token);
-        target.searchParams.set('refresh_token', refresh_token);
+      if (!access_token || !refresh_token) {
+        window.location.href = `/login?redirect_to=${encodeURIComponent(target.toString())}`;
+        return;
       }
+      target.searchParams.set('access_token', access_token);
+      target.searchParams.set('refresh_token', refresh_token);
       window.location.href = target.toString();
     } catch {
       window.location.href = url;
@@ -173,10 +179,12 @@ export default function MainDashboard() {
       const { data } = await supabase.auth.getSession();
       const access_token = data.session?.access_token || session?.access_token;
       const refresh_token = data.session?.refresh_token || session?.refresh_token;
-      if (access_token && refresh_token) {
-        target.searchParams.set('access_token', access_token);
-        target.searchParams.set('refresh_token', refresh_token);
+      if (!access_token || !refresh_token) {
+        window.location.href = `/login?redirect_to=${encodeURIComponent(target.toString())}`;
+        return;
       }
+      target.searchParams.set('access_token', access_token);
+      target.searchParams.set('refresh_token', refresh_token);
       window.location.href = target.toString();
     } catch {
       window.location.href = url;
@@ -194,10 +202,12 @@ export default function MainDashboard() {
       const { data } = await supabase.auth.getSession();
       const access_token = data.session?.access_token || session?.access_token;
       const refresh_token = data.session?.refresh_token || session?.refresh_token;
-      if (access_token && refresh_token) {
-        target.searchParams.set('access_token', access_token);
-        target.searchParams.set('refresh_token', refresh_token);
+      if (!access_token || !refresh_token) {
+        window.location.href = `/login?redirect_to=${encodeURIComponent(target.toString())}`;
+        return;
       }
+      target.searchParams.set('access_token', access_token);
+      target.searchParams.set('refresh_token', refresh_token);
       window.location.href = target.toString();
     } catch {
       window.location.href = url;

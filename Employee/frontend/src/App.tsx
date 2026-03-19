@@ -43,7 +43,7 @@ export default function App() {
       <main>
         <Routes>
           <Route
-            path="/employee"
+            path="/"
             element={
               <Protected>
                 <EmployeePortal />
@@ -51,12 +51,12 @@ export default function App() {
             }
           />
           <Route
-            path="/"
+            path="/employee"
             element={
               session ? (
-                <Navigate to="/employee" replace />
+                <Navigate to="/" replace />
               ) : (
-                <Navigate to="/employee" replace />
+                <Navigate to="/" replace />
               )
             }
           />
