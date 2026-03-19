@@ -84,7 +84,7 @@ function CompletedOnly({ children, completed }: { children: JSX.Element; complet
 }
 
 export default function App() {
-  const { session } = useAuth();
+  const { session, loading } = useAuth();
   const [completed, setCompleted] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -191,7 +191,9 @@ export default function App() {
           <Route
             path="/"
             element={
-              session ? (
+              loading ? (
+                <div className="container-app mt-16">Loading...</div>
+              ) : session ? (
                 completed === null ? (
                   <div className="container-app mt-16">Loading...</div>
                 ) : (
