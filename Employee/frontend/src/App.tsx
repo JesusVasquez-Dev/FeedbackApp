@@ -7,10 +7,19 @@ function Protected({ children }: { children: JSX.Element }) {
   const { session, loading } = useAuth();
   if (loading) return <div className="container-app mt-16">Loading...</div>;
   if (!session) {
-    const mainLoginUrl =
-      (import.meta as any).env?.VITE_LOGIN_URL ||
-      (import.meta as any).env?.VITE_MAIN_LOGIN_URL ||
-      'http://localhost:5173/login';
+    const mainLoginUrl = (() => {
+      const raw =
+        (import.meta as any).env?.VITE_LOGIN_URL ||
+        (import.meta as any).env?.VITE_MAIN_LOGIN_URL ||
+        'http://localhost:5173/login';
+      try {
+        const u = new URL(raw);
+        if (!u.pathname || u.pathname === '/') u.pathname = '/login';
+        return u.toString();
+      } catch {
+        return raw;
+      }
+    })();
     const redirect = encodeURIComponent(window.location.href);
     const sep = mainLoginUrl.includes('?') ? '&' : '?';
     window.location.href = `${mainLoginUrl}${sep}redirect_to=${redirect}`;

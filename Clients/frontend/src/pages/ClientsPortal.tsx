@@ -67,7 +67,16 @@ export default function ClientsPortal() {
       return raw;
     }
   })();
-  const loginUrl = (import.meta as any).env?.VITE_LOGIN_URL || "http://localhost:5173/login";
+  const loginUrl = (() => {
+    const raw = (import.meta as any).env?.VITE_LOGIN_URL || "http://localhost:5173/login";
+    try {
+      const u = new URL(raw);
+      if (!u.pathname || u.pathname === "/") u.pathname = "/login";
+      return u.toString();
+    } catch {
+      return raw;
+    }
+  })();
   const hideDashboardItem = String((import.meta as any).env?.VITE_HIDE_DASHBOARD_MENU || "").toLowerCase() === "true";
   const goToMainDashboard = () => { window.location.href = mainDashboardUrl; };
   const handleSignOut = async () => { await signOut?.(); window.location.href = loginUrl; };
