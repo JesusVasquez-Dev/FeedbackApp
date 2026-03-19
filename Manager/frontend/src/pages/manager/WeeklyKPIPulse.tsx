@@ -539,7 +539,7 @@ function SliderQuestion({
           <span className="text-primary font-semibold">{value}</span>/{max}
         </div>
       </div>
-      <Slider value={[value]} onValueChange={(v) => onChange(v[0] ?? 0)} min={0} max={max} step={1} />
+      <Slider value={value} onValueChange={(v) => onChange(v[0] ?? 0)} min={0} max={max} step={1} />
     </div>
   );
 }
