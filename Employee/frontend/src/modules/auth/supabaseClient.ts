@@ -4,6 +4,12 @@ const env = (import.meta as any).env || {};
 const url = env.VITE_SUPABASE_URL as string;
 const anon = env.VITE_SUPABASE_ANON_KEY as string;
 
+if (!url || !anon) {
+  console.error(
+    '[Employee] Missing Supabase env vars. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY on the Render static site env vars, then redeploy.'
+  );
+}
+
 export const supabase = createClient(url, anon, {
   auth: {
     persistSession: true,

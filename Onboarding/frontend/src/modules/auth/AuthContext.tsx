@@ -31,6 +31,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (access && refresh) {
           try { await supabase.auth.signOut(); } catch {}
           const { data, error } = await supabase.auth.setSession({ access_token: access, refresh_token: refresh });
+          if (error) {
+            console.error('[Onboarding] supabase.auth.setSession failed', error);
+          }
           if (!error) {
             setSession(data.session ?? null);
             setUser(data.session?.user ?? null);
