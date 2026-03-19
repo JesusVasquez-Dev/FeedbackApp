@@ -110,7 +110,6 @@ export default function MainDashboard() {
       if (access_token && refresh_token) {
         target.searchParams.set('access_token', access_token);
         target.searchParams.set('refresh_token', refresh_token);
-        target.searchParams.set('from', 'login');
       }
       // Navigate in the same tab
       window.location.href = target.toString();
@@ -131,7 +130,6 @@ export default function MainDashboard() {
       if (access_token && refresh_token) {
         target.searchParams.set('access_token', access_token);
         target.searchParams.set('refresh_token', refresh_token);
-        target.searchParams.set('from', 'login');
       }
       window.location.href = target.toString();
     } catch {
@@ -153,7 +151,6 @@ export default function MainDashboard() {
       if (access_token && refresh_token) {
         target.searchParams.set('access_token', access_token);
         target.searchParams.set('refresh_token', refresh_token);
-        target.searchParams.set('from', 'login');
       }
       window.location.href = target.toString();
     } catch {
@@ -162,9 +159,9 @@ export default function MainDashboard() {
   }
 
   async function openCompany() {
-    const url = import.meta.env.VITE_COMPANY_URL as string | undefined;
+    const url = (import.meta.env.VITE_CLIENTS_URL || import.meta.env.VITE_COMPANY_URL) as string | undefined;
     if (!url) {
-      alert('Company URL is not configured. Please set VITE_COMPANY_URL in the Login frontend .env file.');
+      alert('Clients URL is not configured. Please set VITE_CLIENTS_URL in your frontend environment.');
       return;
     }
     try {
@@ -175,7 +172,6 @@ export default function MainDashboard() {
       if (access_token && refresh_token) {
         target.searchParams.set('access_token', access_token);
         target.searchParams.set('refresh_token', refresh_token);
-        target.searchParams.set('from', 'login');
       }
       window.location.href = target.toString();
     } catch {
@@ -197,7 +193,6 @@ export default function MainDashboard() {
       if (access_token && refresh_token) {
         target.searchParams.set('access_token', access_token);
         target.searchParams.set('refresh_token', refresh_token);
-        target.searchParams.set('from', 'login');
       }
       window.location.href = target.toString();
     } catch {

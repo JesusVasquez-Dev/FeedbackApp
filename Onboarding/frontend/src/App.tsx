@@ -18,11 +18,13 @@ function Protected({ children }: { children: JSX.Element }) {
   const { session, loading } = useAuth();
   if (loading) return <div className="container-app mt-16">Loading...</div>;
   if (!session) {
-    const mainLoginUrl = (import.meta as any).env?.VITE_MAIN_LOGIN_URL || 'http://localhost:5173/login';
+    const mainLoginUrl =
+      (import.meta as any).env?.VITE_LOGIN_URL ||
+      (import.meta as any).env?.VITE_MAIN_LOGIN_URL ||
+      'http://localhost:5173/login';
     const redirect = encodeURIComponent(window.location.href);
-    // Hard redirect to external login and come back here after login. Tag request as coming from onboarding.
     const sep = mainLoginUrl.includes('?') ? '&' : '?';
-    window.location.href = `${mainLoginUrl}${sep}redirect_to=${redirect}&from=onboarding`;
+    window.location.href = `${mainLoginUrl}${sep}redirect_to=${redirect}`;
     return null;
   }
   return children;

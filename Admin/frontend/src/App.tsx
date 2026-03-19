@@ -6,7 +6,16 @@ import EmployeePortal from './pages/AdminPortal';
 function Protected({ children }: { children: JSX.Element }) {
   const { session, loading } = useAuth();
   if (loading) return <div className="container-app mt-16">Loading...</div>;
-  // TEMP: allow access even without a local session so we don't bounce back to Login
+  if (!session) {
+    const loginUrl =
+      (import.meta as any).env?.VITE_LOGIN_URL ||
+      (import.meta as any).env?.VITE_MAIN_LOGIN_URL ||
+      'http://localhost:5173/login';
+    const redirect = encodeURIComponent(window.location.href);
+    const sep = loginUrl.includes('?') ? '&' : '?';
+    window.location.href = `${loginUrl}${sep}redirect_to=${redirect}`;
+    return null;
+  }
   return children;
 }
 

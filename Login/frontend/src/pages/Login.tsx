@@ -14,20 +14,35 @@ export default function Login() {
   function getRedirectTo(): string {
     const params = new URLSearchParams(location.search);
     const fromParam = params.get('redirect_to');
-    const fromTag = params.get('from');
     // Default fallback is the main dashboard on this site
     const fallback = `${window.location.origin}/dashboard`;
 
     if (!fromParam) return fallback;
-    // Only allow redirect_to if: (1) from=onboarding AND (2) it matches the configured onboarding URL origin & path
-    if (fromTag !== 'onboarding') return fallback;
     try {
-      const allowed = (import.meta as any).env?.VITE_ONBOARDING_URL || 'http://localhost:5175/onboarding';
-      const allowedUrl = new URL(allowed);
       const targetUrl = new URL(fromParam);
-      const isSameOrigin = targetUrl.origin === allowedUrl.origin;
-      const startsWithPath = targetUrl.pathname.startsWith(allowedUrl.pathname);
-      if (isSameOrigin && startsWithPath) return targetUrl.toString();
+
+      const allowedRaw = [
+        (import.meta as any).env?.VITE_ONBOARDING_URL,
+        (import.meta as any).env?.VITE_ADMIN_URL,
+        (import.meta as any).env?.VITE_MANAGER_URL,
+        (import.meta as any).env?.VITE_CLIENTS_URL,
+        (import.meta as any).env?.VITE_COMPANY_URL,
+        (import.meta as any).env?.VITE_EMPLOYEE_URL,
+        (import.meta as any).env?.VITE_MAIN_DASHBOARD_URL,
+      ].filter(Boolean) as string[];
+
+      const allowedOrigins = allowedRaw
+        .map((u) => {
+          try {
+            return new URL(u).origin;
+          } catch {
+            return null;
+          }
+        })
+        .filter(Boolean) as string[];
+
+      if (allowedOrigins.includes(targetUrl.origin)) return targetUrl.toString();
+
       return fallback;
     } catch {
       return fallback;
