@@ -77,7 +77,16 @@ export default function App() {
     })();
   }, [session?.user?.id]);
   // Redirect target for the main dashboard (another project)
-  const mainDashboardUrl = (import.meta as any).env?.VITE_MAIN_DASHBOARD_URL || 'http://localhost:5173/dashboard';
+  const mainDashboardUrl = (() => {
+    const raw = (import.meta as any).env?.VITE_MAIN_DASHBOARD_URL || 'http://localhost:5173/dashboard';
+    try {
+      const u = new URL(raw);
+      if (!u.pathname || u.pathname === '/') u.pathname = '/dashboard';
+      return u.toString();
+    } catch {
+      return raw;
+    }
+  })();
 
   const goToMainDashboard = () => {
     window.location.href = mainDashboardUrl;

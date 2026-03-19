@@ -27,7 +27,16 @@ export default function EmployeePortal() {
   const [profileName, setProfileName] = useState<string>("");
   const avatarUrl = (user as any)?.user_metadata?.avatar_url as string | undefined;
   const [menuOpen, setMenuOpen] = useState(false);
-  const mainDashboardUrl = (import.meta as any).env?.VITE_MAIN_DASHBOARD_URL || 'http://localhost:5173/dashboard';
+  const mainDashboardUrl = (() => {
+    const raw = (import.meta as any).env?.VITE_MAIN_DASHBOARD_URL || 'http://localhost:5173/dashboard';
+    try {
+      const u = new URL(raw);
+      if (!u.pathname || u.pathname === '/') u.pathname = '/dashboard';
+      return u.toString();
+    } catch {
+      return raw;
+    }
+  })();
   const hideDashboardItem = String((import.meta as any).env?.VITE_HIDE_DASHBOARD_MENU || '').toLowerCase() === 'true';
   const goToMainDashboard = () => { window.location.href = mainDashboardUrl; };
   const handleSignOut = async () => { await signOut(); window.location.reload(); };

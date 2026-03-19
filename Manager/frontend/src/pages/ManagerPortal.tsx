@@ -159,7 +159,16 @@ export default function ManagerPortal() {
   const [displayInitial, setDisplayInitial] = useState<string>("M");
   const [profileName, setProfileName] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState(false);
-  const mainDashboardUrl = (import.meta as any).env?.VITE_MAIN_DASHBOARD_URL || 'http://localhost:5173/dashboard';
+  const mainDashboardUrl = (() => {
+    const raw = (import.meta as any).env?.VITE_MAIN_DASHBOARD_URL || 'http://localhost:5173/dashboard';
+    try {
+      const u = new URL(raw);
+      if (!u.pathname || u.pathname === '/') u.pathname = '/dashboard';
+      return u.toString();
+    } catch {
+      return raw;
+    }
+  })();
   const loginUrl = (import.meta as any).env?.VITE_LOGIN_URL || 'http://localhost:5173/login';
   const hideDashboardItem = String((import.meta as any).env?.VITE_HIDE_DASHBOARD_MENU || '').toLowerCase() === 'true';
   const goToMainDashboard = () => { window.location.href = mainDashboardUrl; };

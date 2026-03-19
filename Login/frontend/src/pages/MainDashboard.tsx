@@ -101,8 +101,8 @@ export default function MainDashboard() {
     }
     try {
       const target = new URL(url);
-      // Always land on the onboarding wizard path to ensure Protected routes and token processing run
-      target.pathname = '/onboarding/welcome';
+      // Land on app root to avoid static-host deep-link 404s; the app will route internally after session is set
+      target.pathname = '/';
       // Ensure we use the freshest session from Supabase
       const { data } = await supabase.auth.getSession();
       const access_token = data.session?.access_token || session?.access_token;
@@ -119,7 +119,11 @@ export default function MainDashboard() {
   }
 
   async function openEmployee() {
-    const url = 'http://localhost:5172';
+    const url = import.meta.env.VITE_EMPLOYEE_URL as string | undefined;
+    if (!url) {
+      alert('Employee URL is not configured. Please set VITE_EMPLOYEE_URL in your frontend environment.');
+      return;
+    }
     try {
       const target = new URL(url);
       // Always land on the employee route
