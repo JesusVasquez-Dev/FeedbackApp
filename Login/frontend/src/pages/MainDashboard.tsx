@@ -126,8 +126,8 @@ export default function MainDashboard() {
     }
     try {
       const target = new URL(url);
-      // Always land on the employee route
-      target.pathname = '/employee';
+      // Land on app root to avoid static-host deep-link 404s; the app will route internally after session is set
+      target.pathname = '/';
       const { data } = await supabase.auth.getSession();
       const access_token = data.session?.access_token || session?.access_token;
       const refresh_token = data.session?.refresh_token || session?.refresh_token;

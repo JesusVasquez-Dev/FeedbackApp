@@ -30,6 +30,17 @@ function Protected({ children }: { children: JSX.Element }) {
   return children;
 }
 
+function ExternalLoginRedirect() {
+  const mainLoginUrl =
+    (import.meta as any).env?.VITE_LOGIN_URL ||
+    (import.meta as any).env?.VITE_MAIN_LOGIN_URL ||
+    'http://localhost:5173/login';
+  const redirect = encodeURIComponent(window.location.href);
+  const sep = mainLoginUrl.includes('?') ? '&' : '?';
+  window.location.href = `${mainLoginUrl}${sep}redirect_to=${redirect}`;
+  return null;
+}
+
 function OnboardingGuard({ children, completed }: { children: JSX.Element; completed: boolean | null }) {
   // Wait until completion status is known to avoid flashing the wizard
   if (completed === null) {
@@ -169,7 +180,7 @@ export default function App() {
                   <Navigate to={completed ? '/employee' : '/onboarding/welcome'} replace />
                 )
               ) : (
-                <Navigate to="/login" replace />
+                <ExternalLoginRedirect />
               )
             }
           />
